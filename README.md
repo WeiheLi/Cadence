@@ -187,24 +187,3 @@ just-updated mean:
 mu  <- (1 - alpha) * mu  + alpha * x
 mad <- (1 - alpha) * mad + alpha * |x - mu|
 ```
-
-## Relation to the code used for the paper
-
-The implementation the paper's experiments ran is the same algorithm wrapped in
-a measurement harness: runtime switches for the ablations, alternative
-initialisations and eviction laws, branch counters, and bookkeeping the oracle
-reads. None of that is here.
-
-The two were checked against each other bucket for bucket. Driven by the same
-streams with the same table geometry and the same seed, the whole table was
-compared field by field after every epoch, floats bit-exact, over 69
-configurations: roomy and saturated tables, one to five rows, the weighted
-variant, and a randomized sweep over every task and sketch parameter. All
-states and all durable-run sets are identical, including under the collision
-pressure that exercises the protection and replacement branches hundreds of
-thousands of times.
-
-## Citation
-
-> Cadence: Real-Time Sustained Stable Item Lookup in High-Speed Data Streams.
-> ICDE 2027.
